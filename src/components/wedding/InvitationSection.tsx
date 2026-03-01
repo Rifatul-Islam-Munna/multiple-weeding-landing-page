@@ -1,22 +1,19 @@
 import { motion } from "framer-motion";
 import { useRSVPStore } from "../../../store/rsvpStore";
+import type { WeddingData } from "@/static-data/data";
 
-// Hearts placed on a circle, alternating filled/outline
-const circleHearts = [
-  { angle: 0, filled: true },
-  { angle: 45, filled: false },
-  { angle: 90, filled: true },
-  { angle: 135, filled: false },
-  { angle: 180, filled: true },
-  { angle: 225, filled: false },
-  { angle: 270, filled: true },
-  { angle: 315, filled: false },
-];
+type InvitationSectionProps = {
+  data: WeddingData["invitation"];
+};
 
-const HeartRipple = () => {
+const HeartRipple = ({
+  hearts,
+}: {
+  hearts: WeddingData["invitation"]["circleHearts"];
+}) => {
   return (
     <>
-      {circleHearts.map((h, idx) => {
+      {hearts.map((h, idx) => {
         const rad = (h.angle * Math.PI) / 180;
         return (
           <motion.div
@@ -61,7 +58,7 @@ const HeartRipple = () => {
   );
 };
 
-const InvitationSection = () => {
+const InvitationSection = ({ data }: InvitationSectionProps) => {
   const { open } = useRSVPStore();
 
   return (
@@ -79,7 +76,7 @@ const InvitationSection = () => {
           style={{
             background: "#ffffff",
             borderRadius: "1.5rem",
-            boxShadow: "0 8px 40px rgba(0,0,0,0.08)",
+
             border: "1.5px solid #f0ddd5",
           }}
           initial={{ opacity: 0, y: 40 }}
@@ -88,13 +85,10 @@ const InvitationSection = () => {
           transition={{ duration: 0.8 }}
         >
           <div className="flex flex-col md:flex-row">
-            {/* ── LEFT — monogram + spinning diamonds + heart ripples ── */}
             <div
               className="md:w-1/2 relative flex items-center justify-center"
               style={{ padding: "4rem 3rem", minHeight: "340px" }}
             >
-              {/* Diamond frame 1 — spins clockwise slowly */}
-              {/* Diamond frame 1 — same size, spins clockwise */}
               <motion.div
                 className="absolute"
                 style={{
@@ -115,7 +109,6 @@ const InvitationSection = () => {
                 }}
               />
 
-              {/* Diamond frame 2 — same size, spins counter-clockwise */}
               <motion.div
                 className="absolute"
                 style={{
@@ -137,13 +130,11 @@ const InvitationSection = () => {
                 }}
               />
 
-              {/* Heart ripple circles */}
-              <HeartRipple />
+              <HeartRipple hearts={data.circleHearts} />
 
-              {/* Monogram — slightly smaller */}
               <motion.img
-                src="/images/floral-monogram.png"
-                alt="Monogram"
+                src={data.monogram.src}
+                alt={data.monogram.alt}
                 className="relative z-10"
                 style={{ width: "8.5rem" }}
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -153,7 +144,6 @@ const InvitationSection = () => {
               />
             </div>
 
-            {/* ── RIGHT — content ── */}
             <motion.div
               className="md:w-1/2 flex flex-col justify-center p-10 md:p-14 text-left"
               initial={{ opacity: 0, x: 30 }}
@@ -161,7 +151,6 @@ const InvitationSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.2 }}
             >
-              {/* Invite line */}
               <p
                 style={{
                   color: "#6b7280",
@@ -169,10 +158,9 @@ const InvitationSection = () => {
                   marginBottom: "0.6rem",
                 }}
               >
-                We invite you to our wedding.
+                {data.inviteLine}
               </p>
 
-              {/* Short gold line */}
               <div
                 style={{
                   width: "2.5rem",
@@ -182,7 +170,6 @@ const InvitationSection = () => {
                 }}
               />
 
-              {/* Names */}
               <h2
                 style={{
                   fontFamily: "'Playfair Display', Georgia, serif",
@@ -193,10 +180,10 @@ const InvitationSection = () => {
                   lineHeight: 1.2,
                 }}
               >
-                Michalis <span style={{ fontSize: "1.6rem" }}>&</span> Fenia
+                {data.names.first} <span style={{ fontSize: "1.6rem" }}>&</span>{" "}
+                {data.names.second}
               </h2>
 
-              {/* Date + venue */}
               <div
                 style={{
                   borderTop: "1px solid #e5e7eb",
@@ -212,14 +199,13 @@ const InvitationSection = () => {
                     marginBottom: "0.3rem",
                   }}
                 >
-                  September 13, 2025, 18:00
+                  {data.dateTime}
                 </p>
                 <p style={{ color: "#6b7280", fontSize: "0.875rem" }}>
-                  Chapel of Saint Gerasimos, Nefeles Estate, Koropi
+                  {data.venue}
                 </p>
               </div>
 
-              {/* Families + Best men */}
               <div
                 style={{
                   display: "grid",
@@ -240,26 +226,20 @@ const InvitationSection = () => {
                       marginBottom: "0.5rem",
                     }}
                   >
-                    The families
+                    {data.familiesTitle}
                   </h4>
-                  <p
-                    style={{
-                      color: "#6b7280",
-                      fontSize: "0.85rem",
-                      lineHeight: 1.7,
-                    }}
-                  >
-                    Aristotle & Vasiliki Polyzou
-                  </p>
-                  <p
-                    style={{
-                      color: "#6b7280",
-                      fontSize: "0.85rem",
-                      lineHeight: 1.7,
-                    }}
-                  >
-                    Elias & Soulas Vlachogiannis
-                  </p>
+                  {data.families.map((name) => (
+                    <p
+                      key={name}
+                      style={{
+                        color: "#6b7280",
+                        fontSize: "0.85rem",
+                        lineHeight: 1.7,
+                      }}
+                    >
+                      {name}
+                    </p>
+                  ))}
                 </div>
                 <div>
                   <h4
@@ -271,30 +251,23 @@ const InvitationSection = () => {
                       marginBottom: "0.5rem",
                     }}
                   >
-                    The best men
+                    {data.bestMenTitle}
                   </h4>
-                  <p
-                    style={{
-                      color: "#6b7280",
-                      fontSize: "0.85rem",
-                      lineHeight: 1.7,
-                    }}
-                  >
-                    Neophytos Syriotis
-                  </p>
-                  <p
-                    style={{
-                      color: "#6b7280",
-                      fontSize: "0.85rem",
-                      lineHeight: 1.7,
-                    }}
-                  >
-                    Evelina Zafiri
-                  </p>
+                  {data.bestMen.map((name) => (
+                    <p
+                      key={name}
+                      style={{
+                        color: "#6b7280",
+                        fontSize: "0.85rem",
+                        lineHeight: 1.7,
+                      }}
+                    >
+                      {name}
+                    </p>
+                  ))}
                 </div>
               </div>
 
-              {/* CTA row */}
               <div className="flex items-center gap-5 flex-wrap">
                 <motion.button
                   onClick={open}
@@ -311,7 +284,7 @@ const InvitationSection = () => {
                   whileHover={{ scale: 1.05, backgroundColor: "#c4733f" }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Confirmation of Presence
+                  {data.ctaLabel}
                 </motion.button>
                 <p
                   style={{
@@ -320,7 +293,7 @@ const InvitationSection = () => {
                     fontStyle: "italic",
                   }}
                 >
-                  RSVP by August 13th
+                  {data.rsvpByText}
                 </p>
               </div>
             </motion.div>

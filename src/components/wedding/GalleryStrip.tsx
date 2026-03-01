@@ -1,16 +1,15 @@
 import { motion } from "framer-motion";
+import type { WeddingData } from "@/static-data/data";
 
-const GalleryStrip = () => {
-  const images = [
-    { src: "/images/couple-photo.jpg", alt: "Michalis & Fenia" },
-    { src: "/images/gallery-1.jpg", alt: "Michalis & Fenia - At the bar" },
-    { src: "/images/gallery-5.jpg", alt: "Michalis & Fenia - Adventure" },
-  ];
+type GalleryStripProps = {
+  data: WeddingData["gallery"];
+};
 
+const GalleryStrip = ({ data }: GalleryStripProps) => {
   return (
     <section id="gallery" className="py-4 bg-card">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-1">
-        {images.map((img, idx) => (
+        {data.images.map((img, idx) => (
           <motion.div
             key={idx}
             className="aspect-[4/5] overflow-hidden"

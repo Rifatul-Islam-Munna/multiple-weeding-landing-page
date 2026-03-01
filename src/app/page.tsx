@@ -11,23 +11,24 @@ import InvitationSection from "@/components/wedding/InvitationSection";
 import FAQSection from "@/components/wedding/FAQSection";
 import FloatingRSVP from "@/components/wedding/FloatingRSVP";
 import RSVPModal from "@/components/wedding/RSVPModal";
+import { weddingData } from "@/static-data/data";
 
 const Index = () => {
   return (
     <main className="overflow-x-hidden relative">
-      <RSVPModal />
+      <RSVPModal data={weddingData.rsvpModal} />
       <div className="fixed inset-0 bg-gradient-to-b from-[#EC884C]/15 via-[#EC884C]/8 via-blue-50/40 via-blue-50/60 to-blue-100/70 -z-10 h-full"></div>
-      <HeroSection />
+      <HeroSection data={weddingData.hero} rsvpButtonData={weddingData.rsvpButton} />
 
-      <QuoteSection />
-      {/*   <ScheduleSection /> */}
-      <LocationSection />
-      <KoumbaroiSection />
-      <MomentsSection />
-      <InvitationSection />
-      <FAQSection />
+      <QuoteSection data={weddingData.quote} />
+      {/*   <ScheduleSection data={weddingData.schedule} /> */}
+      <LocationSection data={weddingData.location} />
+      <KoumbaroiSection data={weddingData.koumbaroi} />
+      <MomentsSection data={weddingData.moments} />
+      <InvitationSection data={weddingData.invitation} />
+      <FAQSection data={weddingData.faq} />
 
-      <FloatingRSVP />
+      <FloatingRSVP data={weddingData.floatingRsvp} />
     </main>
   );
 };

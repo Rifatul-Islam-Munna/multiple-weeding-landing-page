@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Heart, X, Plus, Minus } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { useRSVPStore } from "../../../store/rsvpStore";
+import type { WeddingData } from "@/static-data/data";
 
 interface Guest {
   id: number;
@@ -13,6 +14,10 @@ interface Guest {
   isChild: boolean;
   isYoungChild: boolean;
 }
+
+type RSVPModalProps = {
+  data: WeddingData["rsvpModal"];
+};
 
 const defaultGuest = (id: number): Guest => ({
   id,
@@ -44,7 +49,7 @@ const Toggle = ({
   </button>
 );
 
-const RSVPModal = () => {
+const RSVPModal = ({ data }: RSVPModalProps) => {
   const { isOpen, close } = useRSVPStore();
   const [guests, setGuests] = useState<Guest[]>([defaultGuest(1)]);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -81,10 +86,6 @@ const RSVPModal = () => {
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && close()}>
-      {/*
-        !animate-none kills shadcn's built-in slide-from-top.
-        We fully control animation via the motion.div inside.
-      */}
       <DialogContent
         className="p-0 gap-0 !animate-none duration-0 overflow-hidden"
         style={{
@@ -97,10 +98,8 @@ const RSVPModal = () => {
           maxHeight: "90vh",
         }}
       >
-        {/* a11y title */}
-        <DialogTitle className="sr-only">RSVP</DialogTitle>
+        <DialogTitle className="sr-only">{data.dialogTitle}</DialogTitle>
 
-        {/* Framer Motion controls the real animation */}
         <motion.div
           className="flex flex-col w-full overflow-hidden"
           style={{
@@ -114,7 +113,6 @@ const RSVPModal = () => {
           exit={{ opacity: 0, scale: 0.93, y: 16 }}
           transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* Custom close button */}
           <button
             onClick={close}
             className="absolute top-4 right-4 z-20 flex items-center justify-center w-8 h-8 rounded-full border border-gray-200 text-gray-400 hover:text-gray-600 transition-colors"
@@ -123,7 +121,6 @@ const RSVPModal = () => {
             <X size={15} />
           </button>
 
-          {/* Header */}
           <div className="text-center pt-8 pb-4 px-6 flex-shrink-0">
             <Heart
               size={28}
@@ -141,14 +138,13 @@ const RSVPModal = () => {
                 marginBottom: "0.4rem",
               }}
             >
-              RSVP
+              {data.title}
             </h2>
             <p style={{ color: "#6b7280", fontSize: "0.875rem" }}>
-              Please confirm your attendance by August 13, 2025
+              {data.confirmByText}
             </p>
           </div>
 
-          {/* Scrollable guest list */}
           <div
             ref={scrollRef}
             className="flex-1 overflow-y-auto px-5 pb-4"
@@ -165,7 +161,6 @@ const RSVPModal = () => {
                     padding: "1.25rem",
                   }}
                 >
-                  {/* Guest header */}
                   <div className="flex items-center justify-between mb-4">
                     <h3
                       style={{
@@ -175,7 +170,9 @@ const RSVPModal = () => {
                         color: "#2d3a4a",
                       }}
                     >
-                      {idx === 0 ? "First guest" : `Guest ${idx + 1}`}
+                      {idx === 0
+                        ? data.firstGuestLabel
+                        : `${data.guestLabelPrefix} ${idx + 1}`}
                     </h3>
                     {idx > 0 ? (
                       <button
@@ -191,10 +188,9 @@ const RSVPModal = () => {
                     )}
                   </div>
 
-                  {/* Name */}
                   <input
                     type="text"
-                    placeholder="Name"
+                    placeholder={data.namePlaceholder}
                     value={guest.name}
                     onChange={(e) =>
                       updateGuest(guest.id, { name: e.target.value })
@@ -210,7 +206,6 @@ const RSVPModal = () => {
                     }}
                   />
 
-                  {/* Attending — first guest only */}
                   {idx === 0 && (
                     <div className="flex gap-2 mb-3">
                       <button
@@ -227,7 +222,7 @@ const RSVPModal = () => {
                           border: "1px solid #e5e7eb",
                         }}
                       >
-                        I will come.
+                        {data.comingLabel}
                       </button>
                       <button
                         type="button"
@@ -243,16 +238,15 @@ const RSVPModal = () => {
                           border: "1px solid #e5e7eb",
                         }}
                       >
-                        I will not come.
+                        {data.notComingLabel}
                       </button>
                     </div>
                   )}
 
-                  {/* Phone — first guest only */}
                   {idx === 0 && (
                     <input
                       type="tel"
-                      placeholder="Phone number"
+                      placeholder={data.phonePlaceholder}
                       value={guest.phone}
                       onChange={(e) =>
                         updateGuest(guest.id, { phone: e.target.value })
@@ -269,7 +263,6 @@ const RSVPModal = () => {
                     />
                   )}
 
-                  {/* Child toggles — additional guests only */}
                   {idx > 0 && (
                     <>
                       <div
@@ -277,11 +270,13 @@ const RSVPModal = () => {
                         style={{ background: "#f0f7f4" }}
                       >
                         <div className="flex items-center gap-2">
-                          <span style={{ fontSize: "1.1rem" }}>🧒</span>
+                          <span style={{ fontSize: "1.1rem" }}>
+                            {data.childIcon}
+                          </span>
                           <span
                             style={{ color: "#374151", fontSize: "0.9rem" }}
                           >
-                            He is a child.
+                            {data.childLabel}
                           </span>
                         </div>
                         <Toggle
@@ -312,7 +307,7 @@ const RSVPModal = () => {
                               <span
                                 style={{ color: "#374151", fontSize: "0.9rem" }}
                               >
-                                Age 2-8 years
+                                {data.childAgeLabel}
                               </span>
                               <Toggle
                                 checked={guest.isYoungChild}
@@ -327,9 +322,8 @@ const RSVPModal = () => {
                     </>
                   )}
 
-                  {/* Dietary */}
                   <textarea
-                    placeholder="Special dietary requirements or comments"
+                    placeholder={data.dietaryPlaceholder}
                     value={guest.dietary}
                     onChange={(e) =>
                       updateGuest(guest.id, { dietary: e.target.value })
@@ -349,7 +343,6 @@ const RSVPModal = () => {
               ))}
             </div>
 
-            {/* Add guest */}
             <button
               type="button"
               onClick={addGuest}
@@ -361,11 +354,10 @@ const RSVPModal = () => {
               }}
             >
               <Plus size={15} />
-              Add guest
+              {data.addGuestLabel}
             </button>
           </div>
 
-          {/* Footer */}
           <div
             className="flex gap-3 px-5 py-4 flex-shrink-0"
             style={{ borderTop: "1px solid #f3f4f6" }}
@@ -380,7 +372,7 @@ const RSVPModal = () => {
                 background: "#fff",
               }}
             >
-              Annulment
+              {data.resetLabel}
             </button>
             <motion.button
               type="button"
@@ -390,7 +382,7 @@ const RSVPModal = () => {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
             >
-              Send RSVP
+              {data.submitLabel}
             </motion.button>
           </div>
         </motion.div>

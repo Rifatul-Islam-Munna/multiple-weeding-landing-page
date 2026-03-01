@@ -1,10 +1,18 @@
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import RSVPButton from "./RSVPButton";
+import type { WeddingData } from "@/static-data/data";
 
-const HeroSection = () => {
+type HeroSectionProps = {
+  data: WeddingData["hero"];
+  rsvpButtonData: WeddingData["rsvpButton"];
+};
+
+const HeroSection = ({ data, rsvpButtonData }: HeroSectionProps) => {
   const scrollToNext = () => {
-    document.getElementById("gallery")?.scrollIntoView({ behavior: "smooth" });
+    document
+      .getElementById(data.scrollTargetId)
+      ?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -15,10 +23,9 @@ const HeroSection = () => {
           "linear-gradient(160deg, #fdeee9 0%, #f7ece8 40%, #e9eef7 75%, #dce8f5 100%)",
       }}
     >
-      {/* Monogram — drops in from above */}
       <motion.img
-        src="/images/floral-monogram.png"
-        alt="Floral Monogram"
+        src={data.monogram.src}
+        alt={data.monogram.alt}
         className="mb-8"
         style={{ width: "16rem" }}
         initial={{ opacity: 0, y: -40 }}
@@ -26,7 +33,6 @@ const HeroSection = () => {
         transition={{ duration: 1, ease: "easeOut" }}
       />
 
-      {/* Names — large, drops in from above */}
       <motion.h1
         style={{
           fontFamily: "'Playfair Display', Georgia, serif",
@@ -41,10 +47,10 @@ const HeroSection = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.25 }}
       >
-        Michalis <span style={{ fontSize: "70%" }}>&</span> Fenia
+        {data.names.first} <span style={{ fontSize: "70%" }}>&</span>{" "}
+        {data.names.second}
       </motion.h1>
 
-      {/* Gold divider — scales in */}
       <motion.div
         style={{
           width: "4rem",
@@ -57,7 +63,6 @@ const HeroSection = () => {
         transition={{ duration: 0.6, delay: 0.5 }}
       />
 
-      {/* Subtitle lines — drop in from above */}
       <motion.p
         style={{
           color: "#6b7280",
@@ -69,7 +74,7 @@ const HeroSection = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.65 }}
       >
-        The most beautiful day of our lives,
+        {data.subtitleLines[0]}
       </motion.p>
       <motion.p
         style={{
@@ -82,10 +87,9 @@ const HeroSection = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.8 }}
       >
-        with our most special people
+        {data.subtitleLines[1]}
       </motion.p>
 
-      {/* Date + venue block — drops in from above */}
       <motion.div
         style={{
           borderTop: "1px solid #e5e7eb",
@@ -108,22 +112,18 @@ const HeroSection = () => {
             marginBottom: "0.5rem",
           }}
         >
-          September 13, 2025
+          {data.date}
         </p>
-        <p style={{ color: "#6b7280", fontSize: "0.9rem" }}>
-          Chapel of Saint Gerasimos, Nefeles Estate, Koropi
-        </p>
+        <p style={{ color: "#6b7280", fontSize: "0.9rem" }}>{data.venue}</p>
       </motion.div>
 
-      {/* RSVP Button */}
-      <RSVPButton />
+      <RSVPButton data={rsvpButtonData} />
 
-      {/* Scroll chevron — bounces */}
       <motion.button
         onClick={scrollToNext}
         className="absolute bottom-8"
         style={{ color: "#d4845a" }}
-        aria-label="Scroll down"
+        aria-label={data.scrollButtonAriaLabel}
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
       >

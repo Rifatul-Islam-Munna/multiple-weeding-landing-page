@@ -1,17 +1,11 @@
 import { motion } from "framer-motion";
+import type { WeddingData } from "@/static-data/data";
 
-const koumbaroi = [
-  {
-    image: "/images/koumbaroi-1.jpg",
-    name: "Evelina Zafiri\n& Panagiotis Karathanasis",
-  },
-  {
-    image: "/images/koumbaroi-2.jpg",
-    name: "Neophytos Syriotis\n& Renia Vitouladiti",
-  },
-];
+type KoumbaroiSectionProps = {
+  data: WeddingData["koumbaroi"];
+};
 
-const KoumbaroiSection = () => {
+const KoumbaroiSection = ({ data }: KoumbaroiSectionProps) => {
   return (
     <section
       className="wedding-section"
@@ -20,7 +14,6 @@ const KoumbaroiSection = () => {
           "linear-gradient(160deg, #fdeee9 0%, #f7ece8 40%, #e9eef7 75%, #dce8f5 100%)",
       }}
     >
-      {/* Heading */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -37,7 +30,7 @@ const KoumbaroiSection = () => {
             color: "#9ca3af",
           }}
         >
-          OUR FAVORITE PEOPLE
+          {data.headingEyebrow}
         </p>
         <h2
           className="mb-3"
@@ -48,7 +41,7 @@ const KoumbaroiSection = () => {
             color: "#2d3a4a",
           }}
         >
-          Our best men
+          {data.headingTitle}
         </h2>
         <div
           className="mx-auto"
@@ -56,9 +49,8 @@ const KoumbaroiSection = () => {
         />
       </motion.div>
 
-      {/* Cards grid — wider container, equal gap */}
       <div className="max-w-5xl mx-auto mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 px-6">
-        {koumbaroi.map((k, idx) => (
+        {data.people.map((k, idx) => (
           <motion.div
             key={idx}
             initial={{ opacity: 0, y: 30 }}
@@ -71,12 +63,11 @@ const KoumbaroiSection = () => {
               style={{
                 background: "#ffffff",
                 borderRadius: "1.25rem",
-                boxShadow: "0 4px 24px rgba(0,0,0,0.07)",
+                boxShadow: "0 4px 24px rgba(0,0,0,0.01)",
               }}
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
-              {/* Image — full width, taller */}
               <img
                 src={k.image}
                 alt={k.name}
@@ -85,7 +76,6 @@ const KoumbaroiSection = () => {
                 loading="lazy"
               />
 
-              {/* Name inside card */}
               <div className="py-6 px-4 text-center">
                 {k.name.split("\n").map((line, i) => (
                   <p

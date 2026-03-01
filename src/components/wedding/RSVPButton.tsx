@@ -2,49 +2,38 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Heart } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useRSVPStore } from "../../../store/rsvpStore";
+import type { WeddingData } from "@/static-data/data";
 
-// Top semi-arc: left outline, center filled, right outline
-const topHearts = [
-  { x: -34, y: -48, filled: false },
-  { x: 0, y: -62, filled: true },
-  { x: 34, y: -48, filled: false },
-];
+type RSVPButtonProps = {
+  data: WeddingData["rsvpButton"];
+};
 
-// Bottom semi-arc: mirror of top
-const bottomHearts = [
-  { x: -34, y: 48, filled: false },
-  { x: 0, y: 62, filled: true },
-  { x: 34, y: 48, filled: false },
-];
-
-const allHearts = [...topHearts, ...bottomHearts];
-
-const RSVPButton = () => {
+const RSVPButton = ({ data }: RSVPButtonProps) => {
   const [burst, setBurst] = useState(0);
 
   useEffect(() => {
-    // First burst after 2.5s, then every 4s
     const timeout = setTimeout(() => {
       setBurst(1);
-    }, 40000);
+    }, data.firstBurstDelayMs);
 
     const interval = setInterval(() => {
       setBurst((prev) => prev + 1);
-    }, 4000);
+    }, data.intervalMs);
 
     return () => {
       clearTimeout(timeout);
       clearInterval(interval);
     };
-  }, []);
+  }, [data.firstBurstDelayMs, data.intervalMs]);
+
   const { open, isOpen } = useRSVPStore((set) => set);
   console.log(isOpen);
+
   return (
     <div className="relative inline-flex items-center justify-center">
-      {/* Heart bursts — remount on each burst tick via key */}
       <AnimatePresence>
         {burst > 0 &&
-          allHearts.map((heart, idx) => (
+          data.hearts.map((heart, idx) => (
             <motion.div
               key={`${burst}-${idx}`}
               className="absolute pointer-events-none z-20"
@@ -77,7 +66,6 @@ const RSVPButton = () => {
           ))}
       </AnimatePresence>
 
-      {/* The actual button — unchanged style */}
       <motion.button
         className="wedding-btn relative z-10"
         onClick={() => open()}
@@ -88,7 +76,7 @@ const RSVPButton = () => {
         whileTap={{ scale: 0.95 }}
       >
         <Heart size={16} />
-        RSVP
+        {data.label}
       </motion.button>
     </div>
   );

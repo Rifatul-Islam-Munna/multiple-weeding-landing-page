@@ -1,24 +1,11 @@
 import { motion } from "framer-motion";
+import type { WeddingData } from "@/static-data/data";
 
-const moments = [
-  {
-    image: "/images/moment-1.jpg",
-    title: "Night out",
-    subtitle: "At our favorite restaurant",
-  },
-  {
-    image: "/images/moment-2.jpg",
-    title: "Magical sunset",
-    subtitle: "Romantic moments together",
-  },
-  {
-    image: "/images/moment-3.jpg",
-    title: "Music night",
-    subtitle: "Jazz and love",
-  },
-];
+type MomentsSectionProps = {
+  data: WeddingData["moments"];
+};
 
-const MomentsSection = () => {
+const MomentsSection = ({ data }: MomentsSectionProps) => {
   return (
     <section
       className="wedding-section"
@@ -27,7 +14,6 @@ const MomentsSection = () => {
           "linear-gradient(160deg, #fdeee9 0%, #f7ece8 40%, #e9eef7 75%, #dce8f5 100%)",
       }}
     >
-      {/* Heading */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -44,7 +30,7 @@ const MomentsSection = () => {
             color: "#9ca3af",
           }}
         >
-          A WALK THROUGH OUR MEMORIES
+          {data.headingEyebrow}
         </p>
         <h2
           className="mb-3"
@@ -55,7 +41,7 @@ const MomentsSection = () => {
             color: "#2d3a4a",
           }}
         >
-          Moments
+          {data.headingTitle}
         </h2>
         <div
           className="mx-auto"
@@ -63,9 +49,8 @@ const MomentsSection = () => {
         />
       </motion.div>
 
-      {/* Cards */}
       <div className="max-w-6xl mx-auto mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 px-6">
-        {moments.map((m, idx) => (
+        {data.items.map((m, idx) => (
           <motion.div
             key={idx}
             className="group"
@@ -74,7 +59,6 @@ const MomentsSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: idx * 0.15 }}
           >
-            {/* Card — fixed tall height, overflow hidden for zoom effect */}
             <div
               className="relative overflow-hidden"
               style={{
@@ -83,7 +67,6 @@ const MomentsSection = () => {
                 boxShadow: "0 4px 24px rgba(0,0,0,0.10)",
               }}
             >
-              {/* Image — zooms on hover, card itself stays still */}
               <img
                 src={m.image}
                 alt={m.title}
@@ -91,7 +74,6 @@ const MomentsSection = () => {
                 loading="lazy"
               />
 
-              {/* Dark gradient overlay — only visible on hover */}
               <div
                 className="absolute inset-0 transition-opacity duration-500 ease-in-out opacity-0 group-hover:opacity-100"
                 style={{
@@ -100,7 +82,6 @@ const MomentsSection = () => {
                 }}
               />
 
-              {/* Text overlay — bottom left, slides up on hover */}
               <div className="absolute bottom-0 left-0 p-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-in-out">
                 <h4
                   style={{

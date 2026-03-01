@@ -2,40 +2,34 @@ import { Heart } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useRSVPStore } from "../../../store/rsvpStore";
+import type { WeddingData } from "@/static-data/data";
 
-const topHearts = [
-  { x: -34, y: -48, filled: false },
-  { x: 0, y: -62, filled: true },
-  { x: 34, y: -48, filled: false },
-];
+type FloatingRSVPProps = {
+  data: WeddingData["floatingRsvp"];
+};
 
-const bottomHearts = [
-  { x: -34, y: 48, filled: false },
-  { x: 0, y: 62, filled: true },
-  { x: 34, y: 48, filled: false },
-];
-
-const allHearts = [...topHearts, ...bottomHearts];
-
-const FloatingRSVP = () => {
+const FloatingRSVP = ({ data }: FloatingRSVPProps) => {
   const { open } = useRSVPStore();
   const [burst, setBurst] = useState(0);
 
   useEffect(() => {
-    const timeout = setTimeout(() => setBurst(1), 2500);
-    const interval = setInterval(() => setBurst((prev) => prev + 1), 4000);
+    const timeout = setTimeout(() => setBurst(1), data.firstBurstDelayMs);
+    const interval = setInterval(
+      () => setBurst((prev) => prev + 1),
+      data.intervalMs,
+    );
+
     return () => {
       clearTimeout(timeout);
       clearInterval(interval);
     };
-  }, []);
+  }, [data.firstBurstDelayMs, data.intervalMs]);
 
   return (
     <div className="fixed bottom-6 right-6 z-50 inline-flex items-center justify-center">
-      {/* Heart burst animation */}
       <AnimatePresence>
         {burst > 0 &&
-          allHearts.map((heart, idx) => (
+          data.hearts.map((heart, idx) => (
             <motion.div
               key={`${burst}-${idx}`}
               className="absolute pointer-events-none z-20"
@@ -68,7 +62,6 @@ const FloatingRSVP = () => {
           ))}
       </AnimatePresence>
 
-      {/* Floating button */}
       <motion.button
         className="wedding-btn relative z-10 shadow-lg"
         onClick={open}
@@ -79,7 +72,7 @@ const FloatingRSVP = () => {
         whileTap={{ scale: 0.9 }}
       >
         <Heart size={16} />
-        RSVP
+        {data.label}
       </motion.button>
     </div>
   );

@@ -1,34 +1,11 @@
 import { motion } from "framer-motion";
-import Divider from "./Divider";
+import type { WeddingData } from "@/static-data/data";
 
-const events = [
-  {
-    time: "AT 18:00",
-    title: "The mystery",
-    description:
-      "In a small chapel, as the sun sets, something truly beautiful begins",
-    image: "/images/church.jpg",
-    imageAlt: "Chapel of Saint Gerasimos",
-  },
-  {
-    time: "AT 19:00",
-    title: "Aperitif Hour",
-    description:
-      "A short break with drinks and treats before the party starts",
-    image: "/images/aperitif.png",
-    imageAlt: "Aperitif Hour",
-  },
-  {
-    time: "AT 20:30",
-    title: "The Party!",
-    description:
-      "A summer evening full of lights, music and dances that begin without a schedule",
-    image: "/images/party.jpg",
-    imageAlt: "The Party",
-  },
-];
+type ScheduleSectionProps = {
+  data: WeddingData["schedule"];
+};
 
-const ScheduleSection = () => {
+const ScheduleSection = ({ data }: ScheduleSectionProps) => {
   return (
     <section className="wedding-gradient wedding-section">
       <motion.div
@@ -37,23 +14,20 @@ const ScheduleSection = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <p className="wedding-subtext mb-2">THE BIG DAY</p>
-        <h2 className="wedding-heading mb-2">Program</h2>
+        <p className="wedding-subtext mb-2">{data.headingEyebrow}</p>
+        <h2 className="wedding-heading mb-2">{data.headingTitle}</h2>
         <div className="w-16 h-[2px] bg-wedding-gold mx-auto mb-4" />
       </motion.div>
 
-      {/* Timeline */}
       <div className="max-w-5xl mx-auto mt-16 relative">
-        {/* Vertical timeline line - centered */}
         <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-border -translate-x-1/2" />
 
         <div className="space-y-24">
-          {events.map((event, idx) => {
+          {data.events.map((event, idx) => {
             const isLeft = idx % 2 === 0;
 
             return (
               <div key={idx} className="relative">
-                {/* Timeline dot */}
                 <div className="hidden md:block absolute left-1/2 top-8 -translate-x-1/2 z-10">
                   <div className="w-3 h-3 rounded-full bg-wedding-gold" />
                 </div>
@@ -63,7 +37,6 @@ const ScheduleSection = () => {
                     isLeft ? "md:flex-row" : "md:flex-row-reverse"
                   } items-center`}
                 >
-                  {/* Image card side */}
                   <motion.div
                     className="md:w-[45%]"
                     initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
@@ -81,10 +54,8 @@ const ScheduleSection = () => {
                     </div>
                   </motion.div>
 
-                  {/* Spacer for timeline */}
                   <div className="hidden md:block md:w-[10%]" />
 
-                  {/* Text side */}
                   <motion.div
                     className={`md:w-[45%] ${
                       isLeft ? "md:text-left" : "md:text-right"
