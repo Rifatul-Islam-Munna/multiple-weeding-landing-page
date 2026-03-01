@@ -1,0 +1,134 @@
+@import "tailwindcss";
+@config "../../tailwind.config.ts";
+
+@layer base {
+  :root {
+    --background: 210 30% 95%;
+    --foreground: 220 20% 25%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 25%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 25%;
+
+    --primary: 25 70% 58%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 30% 92%;
+    --secondary-foreground: 220 20% 25%;
+
+    --muted: 210 20% 90%;
+    --muted-foreground: 220 10% 50%;
+
+    --accent: 25 70% 58%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 210 20% 85%;
+    --input: 210 20% 85%;
+    --ring: 25 70% 58%;
+
+    --radius: 0.5rem;
+
+    /* Wedding-specific tokens */
+    --wedding-peach: 25 80% 90%;
+    --wedding-blue: 210 40% 90%;
+    --wedding-gold: 25 70% 58%;
+    --wedding-dark: 220 20% 25%;
+    --wedding-light: 220 10% 50%;
+  }
+
+  .dark {
+    --background: 220 20% 10%;
+    --foreground: 210 30% 95%;
+    --card: 220 20% 12%;
+    --card-foreground: 210 30% 95%;
+    --popover: 220 20% 12%;
+    --popover-foreground: 210 30% 95%;
+    --primary: 25 70% 58%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 20% 18%;
+    --secondary-foreground: 210 30% 95%;
+    --muted: 220 20% 18%;
+    --muted-foreground: 210 20% 65%;
+    --accent: 25 70% 58%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 220 20% 18%;
+    --input: 220 20% 18%;
+    --ring: 25 70% 58%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .wedding-gradient {
+    background: linear-gradient(
+      180deg,
+      hsl(var(--wedding-peach)) 0%,
+      hsl(var(--wedding-blue)) 100%
+    );
+  }
+
+  .wedding-gradient-reverse {
+    background: linear-gradient(
+      180deg,
+      hsl(var(--wedding-blue)) 0%,
+      hsl(var(--wedding-peach)) 100%
+    );
+  }
+
+  .wedding-section {
+    @apply py-20 px-6 text-center;
+  }
+
+  .wedding-heading {
+    @apply text-3xl md:text-4xl font-light tracking-wide;
+    color: hsl(var(--wedding-dark));
+  }
+
+  .wedding-subtext {
+    @apply text-sm md:text-base tracking-widest uppercase;
+    color: hsl(var(--wedding-light));
+  }
+
+  .wedding-body {
+    @apply text-base font-light leading-relaxed;
+    color: hsl(var(--wedding-light));
+  }
+
+  .wedding-divider {
+    @apply mx-auto my-6;
+    max-width: 120px;
+  }
+
+  .wedding-btn {
+    @apply inline-flex items-center gap-2 px-8 py-3 rounded-full text-sm tracking-wider transition-all duration-300;
+    background: hsl(var(--wedding-gold));
+    color: hsl(var(--primary-foreground));
+  }
+
+  .wedding-btn:hover {
+    background: hsl(25 70% 52%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px hsl(25 70% 58% / 0.3);
+  }
+
+  .wedding-card {
+    @apply rounded-2xl overflow-hidden shadow-lg;
+    background: hsl(var(--card));
+  }
+}
