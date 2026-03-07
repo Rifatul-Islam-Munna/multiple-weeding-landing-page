@@ -5,8 +5,8 @@ export const weddingData = {
       alt: "Floral Monogram",
     },
     names: {
-      first: "Michalis",
-      second: "Fenia",
+      first: "Andrea",
+      second: "Sloula",
     },
     subtitleLines: [
       "The most beautiful day of our lives,",
