@@ -5,15 +5,16 @@ export const weddingData = {
       alt: "Floral Monogram",
     },
     names: {
-      first: "Andrea",
-      second: "Sloula",
+      first: "Ανδρέας ",
+      second: "Λούλα",
     },
     subtitleLines: [
-      "The most beautiful day of our lives,",
-      "with our most special people",
+      "Ύστερα από 8 χρόνια μαζί, γεμάτα όμορφες στιγμές αλλά και ",
+      "προκλήσεις που μας έφεραν πιο κοντά, αποφασίσαμε να  μοιραστούμε το υπόλοιπο της ζωής μας. Μέσα σε αυτά τα χρόνια εξελιχθήκαμε, ωριμάσαμε, στηρίξαμε ο ένας τον άλλον και καταφέραμε πολλά μαζί. Η αγάπη μας μάς έδωσε δύναμη, θάρρος και μας έκανε να ονειρευόμαστε στο μέλλον τις ευχές μας να γίνονται πραγματικότητα. Ένα καλοκαιρινό απόγευμα του Ιουνίου, με χαμόγελo και τους ανθρώπους που αγαπάμε, σας περιμένουμε να γίνετε μέρος της πιο όμορφης αρχής μας. Ελάτε να δημιουργήσουμε μαζί αναμνήσεις που θα μας συντροφεύουν για πάντα.",
+   
     ],
-    date: "September 13, 2025",
-    venue: "Chapel of Saint Gerasimos, Nefeles Estate, Koropi",
+    date: "Σάββατο 27 Ιουνίου 2026 και ώρα 6: 30 μ.μ",
+    venue: "Τοποθεσία: Ιερός Ναός Αγίου Γεωργίου, Αγκαιριά  Πάρος",
     scrollTargetId: "gallery",
     scrollButtonAriaLabel: "Scroll down",
   },
@@ -40,14 +41,14 @@ export const weddingData = {
       "/images/moment-3.jpg",
     ],
     quote:
-      '"From our first ride, to the packed weekends, the trips with Elli in the back seat, and the weekdays with coffee in hand... every journey has brought us here."',
-    imageAlt: "Michalis & Fenia",
+      '"Ελάτε να δημιουργήσουμε μαζί αναμνήσεις που θα μας συντροφεύουν για πάντα."',
+    imageAlt: "Ανδρέας & Λούλα",
   },
   gallery: {
     images: [
-      { src: "/images/couple-photo.jpg", alt: "Michalis & Fenia" },
-      { src: "/images/gallery-1.jpg", alt: "Michalis & Fenia - At the bar" },
-      { src: "/images/gallery-5.jpg", alt: "Michalis & Fenia - Adventure" },
+      { src: "/images/couple-photo.jpg", alt: "Ανδρέας & Λούλα" },
+      { src: "/images/gallery-1.jpg", alt: "Ανδρέας & Λούλα - At the bar" },
+      { src: "/images/gallery-5.jpg", alt: "Ανδρέας & Λούλα - Adventure" },
     ],
   },
   location: {
@@ -87,8 +88,9 @@ export const weddingData = {
       parking: "Parking available",
       buttonLabel: "Location",
       mapsHref:
-        "https://maps.google.com/?q=%CE%9A%CF%84%CE%AE%CE%BC%CE%B1+%CE%9D%CE%B5%CF%86%CE%AD%CE%BB%CE%B5%CF%82+%CE%9A%CE%BF%CF%81%CF%89%CF%80%CE%AF",
+        "https://maps.app.goo.gl/nxUZfZFEoDiFvqnJ9",
     },
+
   },
   schedule: {
     headingEyebrow: "THE BIG DAY",
@@ -126,11 +128,11 @@ export const weddingData = {
     people: [
       {
         image: "/images/koumbaroi-1.jpg",
-        name: "Evelina Zafiri\n& Panagiotis Karathanasis",
+        name: "Βασίλης Παναγιωτόπουλος\n& Βάλια Χατζή",
       },
       {
         image: "/images/koumbaroi-2.jpg",
-        name: "Neophytos Syriotis\n& Renia Vitouladiti",
+        name: "Δημήτρης Κομπόσης\n& Νικολέττα Σικαλιά",
       },
     ],
   },
@@ -172,18 +174,18 @@ export const weddingData = {
     },
     inviteLine: "We invite you to our wedding.",
     names: {
-      first: "Michalis",
-      second: "Fenia",
+      first: "Ανδρέας",
+      second: "Λούλα",
     },
-    dateTime: "September 13, 2025, 18:00",
-    venue: "Chapel of Saint Gerasimos, Nefeles Estate, Koropi",
+    dateTime: "Σάββατο 27 Ιουνίου 2026 και ώρα 6: 30 μ.μ",
+    venue: "Τοποθεσία: Ιερός Ναός Αγίου Γεωργίου, Αγκαιριά  Πάρος",
     familiesTitle: "The families",
     families: [
-      "Aristotle & Vasiliki Polyzou",
-      "Elias & Soulas Vlachogiannis",
+      "Οι γονείς μας  ",
+      "Δημήτρης ΚομπόσηςΝικολέττα Σικαλιά",
     ],
     bestMenTitle: "The best men",
-    bestMen: ["Neophytos Syriotis", "Evelina Zafiri"],
+    bestMen: ["Βασίλης Παναγιωτόπουλος", "Βάλια Χατζή"],
     ctaLabel: "Confirmation of Presence",
     rsvpByText: "RSVP by August 13th",
   },
