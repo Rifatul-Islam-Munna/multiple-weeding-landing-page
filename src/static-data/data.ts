@@ -84,7 +84,7 @@ export const weddingData = {
       label: "Location",
       venue: "Chapel of Saint Gerasimos - Nefeles Estate",
       city: "Koropi",
-      address: "50 Agios Ioannou and Theseos, Koropi 194 00",
+      address: "Τοποθεσία: Ιερός Ναός Αγίου Γεωργίου, Αγκαιριά Πάρος",
       parking: "Parking available",
       buttonLabel: "Location",
       mapsHref:
