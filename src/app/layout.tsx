@@ -12,7 +12,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: weddingData.hero.monogram.alt,
+  title: "Andreas Loula",
   description: "Wedding Invitation",
 };
 

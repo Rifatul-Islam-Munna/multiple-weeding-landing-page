@@ -29,12 +29,18 @@ const Index = () => {
       <KoumbaroiSection data={weddingData.koumbaroi} />
       <MomentsSection data={weddingData.moments} />
       <InvitationSection data={weddingData.invitation} />
-      <FAQSection data={weddingData.faq} />
+      {/*   <FAQSection data={weddingData.faq} /> */}
 
-      {/*     <FloatingRSVP data={weddingData.floatingRsvp} /> */}
-      <p>
-        Προαιρετική λίστα γάμου: ΙΒΑΝ GR3502603940000100201257005 (Eurobank)
-      </p>
+      <FloatingRSVP data={weddingData.floatingRsvp} />
+      <div className="text-center py-6 px-4">
+        <p className="text-gray-500 text-base tracking-wide mb-1">
+          Προαιρετική λίστα γάμου
+        </p>
+        <p className="text-gray-800 font-semibold text-lg tracking-widest">
+          IBAN: GR3502603940000100201257005
+        </p>
+        <p className="text-gray-400 text-sm mt-1">(Eurobank)</p>
+      </div>
     </main>
   );
 };
