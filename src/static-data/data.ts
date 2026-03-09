@@ -139,10 +139,10 @@ export const weddingData = {
     headingEyebrow: "OUR FAVORITE PEOPLE",
     headingTitle: "Οι κουμπάροι μας",
     people: [
-      {
+     /*  {
         image: "/images/koumbaroi-1.jpg",
         name: "Δημήτρης Κομπόσης \n & Νικολέττα Σικαλιά",
-      },
+      }, */
       {
         image: "/images/koumbaroi-2.jpg",
         name: "Βασίλης Παναγιωτόπουλος \n  & Βάλια Χατζή",
