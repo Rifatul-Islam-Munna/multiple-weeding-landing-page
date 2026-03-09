@@ -49,10 +49,11 @@ const KoumbaroiSection = ({ data }: KoumbaroiSectionProps) => {
         />
       </motion.div>
 
-      <div className="max-w-5xl mx-auto mt-12 grid grid-cols-1 gap-8 px-6">
+      <div className="max-w-7xl mx-auto mt-12 flex flex-wrap justify-center gap-8 px-6">
         {data.people.map((k, idx) => (
           <motion.div
             key={idx}
+            style={{ width: "28rem" }}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
