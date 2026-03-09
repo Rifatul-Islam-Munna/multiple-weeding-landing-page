@@ -144,6 +144,60 @@ const ProgramAndLocation = ({ data }: LocationSectionProps) => {
           </div>
         </motion.div>
       </section>
+      <section className="wedding-section pt-24">
+        <motion.div
+          className="max-w-2xl mx-auto relative"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+        >
+          <div
+            className="hidden md:block absolute left-1/2 -translate-x-1/2 w-px bg-wedding-gold z-10"
+            style={{ top: "-6rem", height: "6rem" }}
+          />
+
+          <div
+            className="bg-white rounded-2xl shadow-md text-center px-10 py-10"
+            style={{ border: "1.5px solid #e8c9b8" }}
+          >
+            <p className="text-sm text-gray-500 tracking-wide mb-2">
+              {data.card2.label}
+            </p>
+            <div className="w-8 h-[1.5px] bg-wedding-gold mx-auto mb-6" />
+
+            <h3 className="font-serif text-2xl md:text-3xl font-light text-wedding-dark mb-6 leading-snug">
+              {data.card2.venue}
+            </h3>
+
+            <hr className="border-gray-100 mb-5" />
+
+            <p className="text-gray-600 font-medium mb-1">{data.card2.city}</p>
+            <p className="text-gray-400 text-sm mb-5">{data.card2.address}</p>
+
+            <hr className="border-gray-100 mb-5" />
+
+            <p className="text-gray-400 text-sm mb-8">{data.card2.parking}</p>
+
+            <motion.a
+              href={data.card2.mapsHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm text-wedding-gold transition-all"
+              style={{ border: "1.5px solid #d4845a" }}
+              whileHover={{
+                scale: 1.05,
+                backgroundColor: "#d4845a",
+                color: "#fff",
+              }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <MapPin size={15} />
+              {data.card2.buttonLabel}
+            </motion.a>
+          </div>
+        </motion.div>
+      </section>
     </div>
   );
 };

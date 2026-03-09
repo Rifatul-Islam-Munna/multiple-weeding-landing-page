@@ -18,7 +18,10 @@ const Index = () => {
     <main className="overflow-x-hidden relative">
       <RSVPModal data={weddingData.rsvpModal} />
       <div className="fixed inset-0 bg-gradient-to-b from-[#EC884C]/15 via-[#EC884C]/8 via-blue-50/40 via-blue-50/60 to-blue-100/70 -z-10 h-full"></div>
-      <HeroSection data={weddingData.hero} rsvpButtonData={weddingData.rsvpButton} />
+      <HeroSection
+        data={weddingData.hero}
+        rsvpButtonData={weddingData.rsvpButton}
+      />
 
       <QuoteSection data={weddingData.quote} />
       {/*   <ScheduleSection data={weddingData.schedule} /> */}
@@ -28,7 +31,10 @@ const Index = () => {
       <InvitationSection data={weddingData.invitation} />
       <FAQSection data={weddingData.faq} />
 
-      <FloatingRSVP data={weddingData.floatingRsvp} />
+      {/*     <FloatingRSVP data={weddingData.floatingRsvp} /> */}
+      <p>
+        Προαιρετική λίστα γάμου: ΙΒΑΝ GR3502603940000100201257005 (Eurobank)
+      </p>
     </main>
   );
 };

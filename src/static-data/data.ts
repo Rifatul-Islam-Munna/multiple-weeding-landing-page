@@ -56,35 +56,45 @@ export const weddingData = {
     headingTitle: "Program",
     events: [
       {
-        time: "AT 18:00",
-        title: "The mystery",
+        time: "AT 18:30",
+        title: "Το μυστήριο",
         description:
-          "In a small chapel, as the sun sets, something truly beautiful begins.",
+          "Ιερός Ναός Αγίου Γεωργίου στην Αγκαιριά της Πάρου",
         image: "/images/church.jpg",
         imageAlt: "Chapel of Saint Gerasimos",
       },
       {
-        time: "AT 19:00",
-        title: "Aperitif Hour",
+        time: "AT 20:00",
+        title: "Φτάνουμε στην δεξίωση",
         description:
-          "A short break with drinks and treats before the party starts.",
+          "Ένα μικρό διάλλειμαμ για welcome drink στην δεξίω",
         image: "/images/aperitif.png",
         imageAlt: "Aperitif Hour",
       },
       {
         time: "AT 20:30",
-        title: "The Party!",
+        title: "To πάρτυ",
         description:
-          "A summer evening full of lights, music and dancing that starts without a program.",
+          "Μια καλοκαιρινή βραδιά γεμάτη φώτα, μουσική και χορό που ξεκινάει χωρίς πρόγραμμα",
         image: "/images/party.jpg",
         imageAlt: "The Party",
       },
     ],
     card: {
-      label: "Location",
-      venue: "Chapel of Saint Gerasimos - Nefeles Estate",
-      city: "Koropi",
+      label: "Ημερομηνία",
+      venue: "Ακτή",
+      city: "Νάουσα Πάρος",
       address: "Τοποθεσία: Ιερός Ναός Αγίου Γεωργίου, Αγκαιριά Πάρος",
+      parking: "Parking available",
+      buttonLabel: "Location",
+      mapsHref:
+        "https://maps.app.goo.gl/FG6KKMu9kHgNN75g6",
+    },
+    card2: {
+      label: "Ημερομηνία",
+      venue: "Ακτή",
+      city: "Νάουσα Πάρος",
+      address: "Ιερός Ναός Αγίου Γεωργίου, Αγκαιριά  Πάρος",
       parking: "Parking available",
       buttonLabel: "Location",
       mapsHref:
@@ -93,8 +103,8 @@ export const weddingData = {
 
   },
   schedule: {
-    headingEyebrow: "THE BIG DAY",
-    headingTitle: "Program",
+    headingEyebrow: "Η ΜΕΓΑΛΗ ΜΕΡΑ",
+    headingTitle: "Πρόγραμμα",
     events: [
       {
         time: "AT 18:00",
@@ -187,7 +197,7 @@ export const weddingData = {
     bestMenTitle: "The best men",
     bestMen: ["Βασίλης Παναγιωτόπουλος", "Βάλια Χατζή"],
     ctaLabel: "Confirmation of Presence",
-    rsvpByText: "RSVP by August 13th",
+    rsvpByText: "RSVP by 31 Μαΐου 2026",
   },
   faq: {
     headingEyebrow: "EVERYTHING YOU WANT TO KNOW",
@@ -214,7 +224,7 @@ export const weddingData = {
       },
       {
         question: "By when do I have to send the RSVP?",
-        answer: "Please send your RSVP by August 13, 2025.",
+        answer: "Παρακαλούμε ενημερώστε μας για την παρουσία σας μέχρι τις 31 Μαΐου 2026",
       },
       {
         question: "Is there any way we can contribute to your new beginning?",
@@ -239,7 +249,7 @@ export const weddingData = {
   rsvpModal: {
     dialogTitle: "RSVP",
     title: "RSVP",
-    confirmByText: "Please confirm your attendance by August 13, 2025",
+    confirmByText: "Παρακαλούμε ενημερώστε μας για την παρουσία σας μέχρι τις 31 Μαΐου 2026",
     firstGuestLabel: "First guest",
     guestLabelPrefix: "Guest",
     namePlaceholder: "Name",
