@@ -12,6 +12,7 @@ import {
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { useRSVPStore } from "../../../store/rsvpStore";
 import type { WeddingData } from "@/static-data/data";
+import { toast } from "sonner";
 
 interface Guest {
   id: number;
@@ -148,6 +149,7 @@ const RSVPModal = ({ data }: RSVPModalProps) => {
 
       // Auto-close after success
       handleReset();
+      toast.success("RSVP submitted successfully!");
     } catch (err) {
       console.error("RSVP submission error:", err);
       setSubmitStatus("error");
