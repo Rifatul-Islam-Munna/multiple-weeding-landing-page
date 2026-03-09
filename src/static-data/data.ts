@@ -2,7 +2,7 @@ export const weddingData = {
   hero: {
     monogram: {
       src: "/images/floral-monogram.png",
-      alt: "Floral Monogram",
+      alt: "Ανδρέας & Λούλα",
     },
     names: {
       first: "Ανδρέας ",
