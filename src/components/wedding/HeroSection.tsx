@@ -27,7 +27,7 @@ const HeroSection = ({ data, rsvpButtonData }: HeroSectionProps) => {
         src={data.monogram.src}
         alt={data.monogram.alt}
         className="mb-8"
-        style={{ width: "16rem" }}
+        style={{ width: "40rem" }}
         initial={{ opacity: 0, y: -40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut" }}
