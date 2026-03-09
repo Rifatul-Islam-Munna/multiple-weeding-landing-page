@@ -147,9 +147,7 @@ const RSVPModal = ({ data }: RSVPModalProps) => {
       setSubmitStatus("success");
 
       // Auto-close after success
-      setTimeout(() => {
-        handleReset();
-      }, 2500);
+      handleReset();
     } catch (err) {
       console.error("RSVP submission error:", err);
       setSubmitStatus("error");
