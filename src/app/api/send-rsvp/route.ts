@@ -71,9 +71,7 @@ function buildEmailHtml(guests: Guest[]): string {
           ${rows}
         </tbody>
       </table>
-      <p style="margin-top:24px;color:#888;font-size:12px;">
-        Sent automatically from your celebrations platform.
-      </p>
+      
     </div>
   `;
 }
