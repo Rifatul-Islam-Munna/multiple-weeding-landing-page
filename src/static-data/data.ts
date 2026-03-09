@@ -82,7 +82,7 @@ export const weddingData = {
       },
     ],
     card: {
-      label: "Ημερομηνία",
+      label: "Δεξίωση ",
       venue: "Ακτή",
       city: "Νάουσα, Πάρος",
       address: "Xώρος δεξιώσεων Ακτή , Νάουσα Πάρος",
