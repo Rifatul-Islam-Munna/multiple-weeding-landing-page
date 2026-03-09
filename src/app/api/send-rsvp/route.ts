@@ -89,7 +89,7 @@ export async function POST(req: NextRequest) {
 
     await transporter.sendMail({
       from: `"Celebrations RSVP" <${process.env.SMTP_FROM}>`,
-      to: "arvnick1@gmail.com", // sends to yourself; change as needed
+      to: "loula2907@gmail.com", // sends to yourself; change as needed
       subject: `🎉 New RSVP Submission – ${guests.length} Guest(s)`,
       html: buildEmailHtml(guests),
     });
