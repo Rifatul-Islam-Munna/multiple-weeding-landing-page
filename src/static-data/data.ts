@@ -92,7 +92,7 @@ export const weddingData = {
     },
     card2: {
       label: "Ημερομηνία",
-      venue: "Ακτή",
+      venue: "Ιερός Ναός Αγίου Γεωργίου",
       city: "Νάουσα Πάρος",
       address: "Ιερός Ναός Αγίου Γεωργίου, Αγκαιριά  Πάρος",
       parking: "Parking available",
