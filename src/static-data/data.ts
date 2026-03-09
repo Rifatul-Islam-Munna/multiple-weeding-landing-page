@@ -258,7 +258,7 @@ export const weddingData = {
     notComingLabel: "I will not come.",
     phonePlaceholder: "Phone number",
     childIcon: "\u{1F9D2}",
-    childLabel: "He is a child.",
+    childLabel: "Is a child.",
     childAgeLabel: "Age 2-8 years",
     dietaryPlaceholder: "Special dietary requirements or comments",
     addGuestLabel: "Add guest",
