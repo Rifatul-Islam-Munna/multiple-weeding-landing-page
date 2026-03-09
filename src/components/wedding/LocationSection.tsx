@@ -144,7 +144,7 @@ const ProgramAndLocation = ({ data }: LocationSectionProps) => {
           </div>
         </motion.div>
       </section>
-      <section className="wedding-section pt-24">
+      <section className="wedding-section -mt-15 ">
         <motion.div
           className="max-w-2xl mx-auto relative"
           initial={{ opacity: 0, y: 30 }}
