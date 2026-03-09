@@ -49,7 +49,7 @@ const KoumbaroiSection = ({ data }: KoumbaroiSectionProps) => {
         />
       </motion.div>
 
-      <div className="max-w-5xl mx-auto mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 px-6">
+      <div className="max-w-5xl mx-auto mt-12 grid grid-cols-1 gap-8 px-6">
         {data.people.map((k, idx) => (
           <motion.div
             key={idx}

@@ -63,32 +63,24 @@ const HeroSection = ({ data, rsvpButtonData }: HeroSectionProps) => {
         transition={{ duration: 0.6, delay: 0.5 }}
       />
 
-      <motion.p
-        style={{
-          color: "#6b7280",
-          fontSize: "1.05rem",
-          lineHeight: 1.8,
-          marginBottom: "0.2rem",
-        }}
-        initial={{ opacity: 0, y: -16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.65 }}
-      >
-        {data.subtitleLines[0]}
-      </motion.p>
-      <motion.p
-        style={{
-          color: "#6b7280",
-          fontSize: "1.05rem",
-          lineHeight: 1.8,
-          marginBottom: "3rem",
-        }}
-        initial={{ opacity: 0, y: -16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.8 }}
-      >
-        {data.subtitleLines[1]}
-      </motion.p>
+      {data.subtitleLines.map((line, index) => (
+        <motion.p
+          key={index}
+          style={{
+            color: "#6b7280",
+            fontSize: "1.05rem",
+            lineHeight: 1.8,
+            marginBottom:
+              index === data.subtitleLines.length - 1 ? "3rem" : "0.2rem",
+            whiteSpace: "pre-line",
+          }}
+          initial={{ opacity: 0, y: -16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.65 + index * 0.15 }}
+        >
+          {line}
+        </motion.p>
+      ))}
 
       <motion.div
         style={{
