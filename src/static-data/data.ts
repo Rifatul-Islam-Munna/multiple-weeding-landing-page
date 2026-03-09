@@ -195,7 +195,7 @@ export const weddingData = {
       "Δημήτρης Κομπόσης ",
       "Νικολέττα Σικαλιά",
     ],
-    bestMenTitle: "The best men",
+    bestMenTitle: "Οι κουμπάροι",
     bestMen: ["Βασίλης Παναγιωτόπουλος", "Βάλια Χατζή"],
     ctaLabel: "Confirmation of Presence",
     rsvpByText: "RSVP by 31 Μαΐου 2026",
