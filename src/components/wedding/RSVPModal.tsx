@@ -1,6 +1,14 @@
 import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Heart, X, Plus, Minus } from "lucide-react";
+import {
+  Heart,
+  X,
+  Plus,
+  Minus,
+  CheckCircle,
+  AlertCircle,
+  Loader2,
+} from "lucide-react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { useRSVPStore } from "../../../store/rsvpStore";
 import type { WeddingData } from "@/static-data/data";
@@ -18,6 +26,8 @@ interface Guest {
 type RSVPModalProps = {
   data: WeddingData["rsvpModal"];
 };
+
+type SubmitStatus = "idle" | "loading" | "success" | "error";
 
 const defaultGuest = (id: number): Guest => ({
   id,
@@ -49,9 +59,50 @@ const Toggle = ({
   </button>
 );
 
+// ─── Feedback Banner ────────────────────────────────────────────────────────
+const FeedbackBanner = ({
+  status,
+  successMessage,
+  errorMessage,
+}: {
+  status: SubmitStatus;
+  successMessage: string;
+  errorMessage: string;
+}) => {
+  if (status !== "success" && status !== "error") return null;
+
+  const isSuccess = status === "success";
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0, y: -8 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -8 }}
+        transition={{ duration: 0.25 }}
+        className="flex items-center gap-2 mx-5 mb-3 px-4 py-3 rounded-xl text-sm font-medium"
+        style={{
+          background: isSuccess ? "#f0fdf4" : "#fef2f2",
+          border: `1px solid ${isSuccess ? "#bbf7d0" : "#fecaca"}`,
+          color: isSuccess ? "#15803d" : "#b91c1c",
+        }}
+      >
+        {isSuccess ? (
+          <CheckCircle size={16} className="flex-shrink-0" />
+        ) : (
+          <AlertCircle size={16} className="flex-shrink-0" />
+        )}
+        {isSuccess ? successMessage : errorMessage}
+      </motion.div>
+    </AnimatePresence>
+  );
+};
+
+// ─── Main Component ──────────────────────────────────────────────────────────
 const RSVPModal = ({ data }: RSVPModalProps) => {
   const { isOpen, close } = useRSVPStore();
   const [guests, setGuests] = useState<Guest[]>([defaultGuest(1)]);
+  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>("idle");
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const updateGuest = (id: number, fields: Partial<Guest>) => {
@@ -74,15 +125,44 @@ const RSVPModal = ({ data }: RSVPModalProps) => {
     setGuests((prev) => prev.filter((g) => g.id !== id));
   };
 
-  const handleSubmit = () => {
-    console.log("RSVP submitted:", guests);
-    close();
+  // ─── Submit Handler ──────────────────────────────────────────────────────
+  const handleSubmit = async () => {
+    // Basic guard: first guest must have a name
+    const primaryGuest = guests[0];
+    if (!primaryGuest.name.trim()) return;
+
+    setSubmitStatus("loading");
+
+    try {
+      const res = await fetch("/api/send-rsvp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(guests),
+      });
+
+      if (!res.ok) {
+        throw new Error(`Server error: ${res.status}`);
+      }
+
+      setSubmitStatus("success");
+
+      // Auto-close after success
+      setTimeout(() => {
+        handleReset();
+      }, 2500);
+    } catch (err) {
+      console.error("RSVP submission error:", err);
+      setSubmitStatus("error");
+    }
   };
 
   const handleReset = () => {
     setGuests([defaultGuest(1)]);
+    setSubmitStatus("idle");
     close();
   };
+
+  const isLoading = submitStatus === "loading";
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && close()}>
@@ -113,6 +193,7 @@ const RSVPModal = ({ data }: RSVPModalProps) => {
           exit={{ opacity: 0, scale: 0.93, y: 16 }}
           transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
         >
+          {/* Close Button */}
           <button
             onClick={close}
             className="absolute top-4 right-4 z-20 flex items-center justify-center w-8 h-8 rounded-full border border-gray-200 text-gray-400 hover:text-gray-600 transition-colors"
@@ -121,6 +202,7 @@ const RSVPModal = ({ data }: RSVPModalProps) => {
             <X size={15} />
           </button>
 
+          {/* Header */}
           <div className="text-center pt-8 pb-4 px-6 flex-shrink-0">
             <Heart
               size={28}
@@ -145,6 +227,18 @@ const RSVPModal = ({ data }: RSVPModalProps) => {
             </p>
           </div>
 
+          {/* Feedback Banner */}
+          <FeedbackBanner
+            status={submitStatus}
+            successMessage={
+              data.successMessage ?? "Your RSVP has been sent successfully!"
+            }
+            errorMessage={
+              data.errorMessage ?? "Something went wrong. Please try again."
+            }
+          />
+
+          {/* Scrollable Guest List */}
           <div
             ref={scrollRef}
             className="flex-1 overflow-y-auto px-5 pb-4"
@@ -346,7 +440,8 @@ const RSVPModal = ({ data }: RSVPModalProps) => {
             <button
               type="button"
               onClick={addGuest}
-              className="w-full flex items-center justify-center gap-2 mt-4 py-3 rounded-full text-sm transition-colors hover:bg-gray-50"
+              disabled={isLoading}
+              className="w-full flex items-center justify-center gap-2 mt-4 py-3 rounded-full text-sm transition-colors hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed"
               style={{
                 border: "1.5px dashed #d1d5db",
                 color: "#6b7280",
@@ -358,6 +453,7 @@ const RSVPModal = ({ data }: RSVPModalProps) => {
             </button>
           </div>
 
+          {/* Footer Buttons */}
           <div
             className="flex gap-3 px-5 py-4 flex-shrink-0"
             style={{ borderTop: "1px solid #f3f4f6" }}
@@ -365,7 +461,8 @@ const RSVPModal = ({ data }: RSVPModalProps) => {
             <button
               type="button"
               onClick={handleReset}
-              className="flex-1 py-3 rounded-full text-sm font-medium transition-colors hover:bg-gray-50"
+              disabled={isLoading}
+              className="flex-1 py-3 rounded-full text-sm font-medium transition-colors hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed"
               style={{
                 border: "1.5px solid #e5e7eb",
                 color: "#374151",
@@ -374,15 +471,24 @@ const RSVPModal = ({ data }: RSVPModalProps) => {
             >
               {data.resetLabel}
             </button>
+
             <motion.button
               type="button"
               onClick={handleSubmit}
-              className="flex-1 py-3 rounded-full text-sm font-medium text-white"
+              disabled={isLoading || submitStatus === "success"}
+              className="flex-1 py-3 rounded-full text-sm font-medium text-white flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
               style={{ background: "#d4845a" }}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
+              whileHover={!isLoading ? { scale: 1.03 } : {}}
+              whileTap={!isLoading ? { scale: 0.97 } : {}}
             >
-              {data.submitLabel}
+              {isLoading ? (
+                <>
+                  <Loader2 size={15} className="animate-spin" />
+                  {data.sendingLabel ?? "Sending..."}
+                </>
+              ) : (
+                data.submitLabel
+              )}
             </motion.button>
           </div>
         </motion.div>
