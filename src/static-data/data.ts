@@ -92,7 +92,7 @@ export const weddingData = {
         "https://maps.app.goo.gl/FG6KKMu9kHgNN75g6",
     },
     card2: {
-      label: "Ημερομηνία",
+      label: "Εκκλησία",
       venue: "Ιερός Ναός Αγίου Γεωργίου",
       city: "Αγκαιριά  Πάρος",
       address: "Ιερός Ναός Αγίου Γεωργίου",
