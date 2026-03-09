@@ -138,11 +138,11 @@ export const weddingData = {
     people: [
       {
         image: "/images/koumbaroi-1.jpg",
-        name: "Βασίλης Παναγιωτόπουλος\n& Βάλια Χατζή",
+        name: "Δημήτρης Κομπόσης \n & Νικολέττα Σικαλιά",
       },
       {
         image: "/images/koumbaroi-2.jpg",
-        name: "Δημήτρης Κομπόσης\n& Νικολέττα Σικαλιά",
+        name: "Βασίλης Παναγιωτόπουλος \n  & Βάλια Χατζή",
       },
     ],
   },
