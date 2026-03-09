@@ -149,7 +149,7 @@ export const weddingData = {
   },
   moments: {
     headingEyebrow: "A WALK THROUGH OUR MEMORIES",
-    headingTitle: "Moments",
+    headingTitle: "Οι στιγμές μας",
     items: [
       {
         image: "/images/moment-1.jpg",
@@ -192,8 +192,8 @@ export const weddingData = {
     venue: "Τοποθεσία: Ιερός Ναός Αγίου Γεωργίου, Αγκαιριά  Πάρος",
     familiesTitle: "Οι γονείς μας",
     families: [
-      "Οι γονείς μας  ",
-      "Δημήτρης ΚομπόσηςΝικολέττα Σικαλιά",
+      "Δημήτρης Κομπόσης ",
+      "Νικολέττα Σικαλιά",
     ],
     bestMenTitle: "The best men",
     bestMen: ["Βασίλης Παναγιωτόπουλος", "Βάλια Χατζή"],
