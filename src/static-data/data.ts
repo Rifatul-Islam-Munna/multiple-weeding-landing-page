@@ -96,8 +96,8 @@ export const weddingData = {
     card2: {
       label: "Ημερομηνία",
       venue: "Ιερός Ναός Αγίου Γεωργίου",
-      city: "Νάουσα Πάρος",
-      address: "Ιερός Ναός Αγίου Γεωργίου, Αγκαιριά  Πάρος",
+      city: "Αγκαιριά  Πάρος",
+      address: "Ιερός Ναός Αγίου Γεωργίου",
       parking: "Parking available",
       buttonLabel: "Location",
       mapsHref:
@@ -137,7 +137,7 @@ export const weddingData = {
   },
   koumbaroi: {
     headingEyebrow: "OUR FAVORITE PEOPLE",
-    headingTitle: "Our best men",
+    headingTitle: "Οι κουμπάροι μας",
     people: [
       {
         image: "/images/koumbaroi-1.jpg",
@@ -192,7 +192,7 @@ export const weddingData = {
     },
     dateTime: "Σάββατο 27 Ιουνίου 2026 και ώρα 6: 30 μ.μ",
     venue: "Τοποθεσία: Ιερός Ναός Αγίου Γεωργίου, Αγκαιριά  Πάρος",
-    familiesTitle: "The families",
+    familiesTitle: "Οι γονείς μας",
     families: [
       "Οι γονείς μας  ",
       "Δημήτρης ΚομπόσηςΝικολέττα Σικαλιά",
